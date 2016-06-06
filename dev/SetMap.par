@@ -1,0 +1,7 @@
+# <num> dssd_num
+# <num> name <dssdname>
+# <num> face <geo> <adc_channel> <dssd_strip>
+# <num> back <geo> <adc_channel> <dssd_strip>
+0 name T1D1
+0 face 3 0-15 0-15
+
