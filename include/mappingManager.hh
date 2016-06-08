@@ -7,6 +7,7 @@ class mappingManager
 {
 public:
 	mappingManager();
+	mappingManager(char* parFile);
 	virtual ~mappingManager();
 	DSSDmapping *DSSD[2];
 };

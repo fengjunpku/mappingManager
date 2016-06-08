@@ -1,22 +1,34 @@
-#
+####
 OBJ = maptest.exe
-#sourcefile = main.cc mappingManager.cc mappingManager.hh DSSDmapping.cc DSSDmapping.hh
-sourcefile = *.cc *.hh
- 
+MainFile = main.cc
+###
+SourceFile := $(wildcard $(shell pwd)/src/*.cc)
+IncludeFile := $(wildcard $(shell pwd)/include/*.hh)
+DIR_INC = -I$(ROOTSYS)/include -I$(shell pwd)/include
+#-I$(TARTSYS)/include
+####
+ROOTCFLAGS  = $(shell root-config --cflags)
+ROOTLIBS    = $(shell root-config --libs)
+#ROOTGLIBS = $(shell root-config --glibs)
+#glibs = -lGui + libs
 
-#ROOTCFLAGS  = $(shell root-config --cflags)
-#ROOTLIBS    = $(shell root-config --libs)
-
+########################
 #CFLAGS = -Wall -O2 -fopenmp
 #CFLAGS = -fopenmp
-CFLAGS = -std=c++0x 
+CFLAGS = -Wall -O -std=c++0x $(DIR_INC)
 #-lMathCore -l MathMore
+#-L$(TARTSYS)/lib
+#-lXMLParser -lanacore -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
 GXX = g++ 
 
 all:$(OBJ)
 
-$(OBJ): $(sourcefile)
-	$(GXX) $(CFLAGS) -o $@ $(filter %.cc ,$(sourcefile))
-
+$(OBJ): $(MainFile) $(sourcefile)
+	$(GXX) $(CFLAGS) $(ROOTCFLAGS) $(ROOTLIBS) -o $@ $(MainFile) $(SourceFile)
+	@echo "================================"
+	@echo "Compile $@ done !"
+	@echo "================================"
+##################
 clean:
 	rm -f *~ *.o $(OBJ)
+###################
