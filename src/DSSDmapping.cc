@@ -33,7 +33,7 @@ int DSSDmapping::GetGeo(string side,int strip)
 
 int DSSDmapping::GetCh(string side,int strip)
 {
-	if(side=="f"||side=="front")
+	if(side=="f"||side=="front"||side=="face")
 	{
 		return fstrip[strip]%1000;
 	}
@@ -54,7 +54,7 @@ void DSSDmapping::SetGeoCh(string side,int strip,int geo,int ch)
 
 void DSSDmapping::SetGeoCh(string side,int strip,int geoch)
 {
-	if(side=="f"||side=="front")
+	if(side=="f"||side=="front"||side=="face")
 	{
 		fstrip[strip]=geoch;
 	}

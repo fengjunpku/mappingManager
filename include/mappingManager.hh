@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <map>
+#include <vector>
 #include <cstdlib>
 
 #include "DSSDmapping.hh"
@@ -16,10 +17,10 @@ class mappingManager
 public:
   mappingManager(const char* parFile);
   virtual ~mappingManager();
-  DSSDmapping *DSSD[2];
+  map<string,DSSDmapping*> mapDSSD;
 private:
   void newDSSD(string dssdName,int numOfFrontStrips, int numOfBackStrips);
-  void setDSSD(string dssdName,string side,int geo,string disChannel,string disStrip);
-  map<string,DSSDmapping*> mDSSD;
+  void setDSSD(string dssdName,string side,int geo,string disStrip,string disChannel);
+  vector<string> split(string str,string pattern);
 };
 #endif

@@ -1,5 +1,5 @@
 # <dssdname> define <front_strips> <back_strips> <total_strips>
-# <dssdname> face <geo> <adc_channel> <dssd_strip>
-# <dssdname> back <geo> <adc_channel> <dssd_strip>
+# <dssdname> face <geo> <dssd_strip> <adc_channel>
+# <dssdname> back <geo> <dssd_strip> <adc_channel>
 T1D1 define 16 0 16
 T1D1 face 3 0-15 0-15
