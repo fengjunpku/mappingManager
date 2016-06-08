@@ -5,6 +5,7 @@ MainFile = main.cc
 SourceFile := $(wildcard $(shell pwd)/src/*.cc)
 IncludeFile := $(wildcard $(shell pwd)/include/*.hh)
 DIR_INC = -I$(ROOTSYS)/include -I$(shell pwd)/include
+MainFile += $(SourceFile)
 #-I$(TARTSYS)/include
 ####
 ROOTCFLAGS  = $(shell root-config --cflags)
@@ -23,8 +24,8 @@ GXX = g++
 
 all:$(OBJ)
 
-$(OBJ): $(MainFile) $(sourcefile)
-	$(GXX) $(CFLAGS) $(ROOTCFLAGS) $(ROOTLIBS) -o $@ $(MainFile) $(SourceFile)
+$(OBJ): $(MainFile)
+	$(GXX) $(CFLAGS) $(ROOTCFLAGS) $(ROOTLIBS) -o $@ $(MainFile)
 	@echo "================================"
 	@echo "Compile $@ done !"
 	@echo "================================"

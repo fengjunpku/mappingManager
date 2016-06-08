@@ -1,5 +1,5 @@
-#ifndef DSSDmapping_h
-#define DSSDmapping_h 1
+#ifndef DSSDmapping_HH
+#define DSSDmapping_HH 1
 
 #include <iostream>
 #include <vector>
@@ -9,14 +9,14 @@ using namespace std;
 class DSSDmapping
 {
 public:
-	DSSDmapping(int numOfFrontStrips, int numOfBackStrips);
-	virtual ~DSSDmapping();
-	int GetGeo(string side,int strip=0);
-	int GetCh(string side,int strip);
-	void SetGeoCh(string side,int strip,int geo,int ch);
-	void SetGeoCh(string side,int strip,int geoch);
+  DSSDmapping(int numOfFrontStrips, int numOfBackStrips);
+  virtual ~DSSDmapping();
+  int GetGeo(string side,int strip=0);
+  int GetCh(string side,int strip);
+  void SetGeoCh(string side,int strip,int geo,int ch);
+  void SetGeoCh(string side,int strip,int geoch);
 private:
-	vector <int> fstrip;
-	vector <int> bstrip;
+  vector <int> fstrip;
+  vector <int> bstrip;
 };
 #endif
