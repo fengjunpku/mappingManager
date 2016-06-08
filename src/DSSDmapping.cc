@@ -17,7 +17,7 @@ DSSDmapping::~DSSDmapping()
 
 int DSSDmapping::GetGeo(string side,int strip)
 {
-	if(side=="f"||side=="front")
+	if(side=="f"||side=="front"||side=="face")
 	{
 		return fstrip[strip]/1000;
 	}

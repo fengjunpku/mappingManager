@@ -18,8 +18,8 @@ public:
   virtual ~mappingManager();
   DSSDmapping *DSSD[2];
 private:
-  //newDSSD(string name,int numOfFrontStrips, int numOfBackStrips);
-  //setDSSD(string name,string side,string disChannel,string disStrip);
-  map<string,DSSDmapping> mDSSD;
+  void newDSSD(string dssdName,int numOfFrontStrips, int numOfBackStrips);
+  void setDSSD(string dssdName,string side,int geo,string disChannel,string disStrip);
+  map<string,DSSDmapping*> mDSSD;
 };
 #endif
