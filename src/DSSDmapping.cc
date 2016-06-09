@@ -51,15 +51,9 @@ void DSSDmapping::SetGeoCh(string side,int strip,int geoch)
     MiaoError(string(buff));
   }
   if(side=="f"||side=="front"||side=="face")
-  {
     fstrip[strip]=geoch;
-  }
   else if(side=="b"||side=="back")
-  {
     bstrip[strip]=geoch;
-  }
   else
-  {
     cout<<"bad input!"<<endl;
-  }
 }
