@@ -5,7 +5,7 @@ mappingManager::mappingManager(const char* parFile)
   ifstream fin;
   fin.open(parFile,ios::in);
   if(!fin)
-  {cout<<"Miao! Error: Can not open "<<parFile<<endl;exit(0);}
+    MiaoError("Can not open '"+string(parFile)+"'");
   string buff;
   while(getline(fin,buff))
   {
@@ -19,6 +19,9 @@ mappingManager::mappingManager(const char* parFile)
     {
       int _numOfFrontStrips = atoi(str2.c_str());
       int _numOfBackStrips = atoi(str3.c_str());
+      int _totalStrips = atoi(str4.c_str());
+      if(_totalStrips != _numOfFrontStrips+_numOfBackStrips)
+        MiaoError(_dssdName+"'s total strips is not correct!");
       newDSSD(_dssdName,_numOfFrontStrips,_numOfBackStrips);
       continue;
     }
@@ -38,17 +41,19 @@ void mappingManager::newDSSD(string dssdName,int numOfFrontStrips, int numOfBack
 
 void mappingManager::setDSSD(string dssdName,string side,int geo,string disStrip,string disChannel)
 {
+  if(!mapDSSD.count(dssdName))
+    MiaoError("Please define "+dssdName+" in the parFile first.");
   vector<string> vDisSt = split(disStrip,"-");
   vector<string> vDisCh = split(disChannel,"-");
-  if(vDisCh.size() != 2|| vDisSt.size() != 2) 
-  {cout<<"Miao! Error: Set the channels and strips like '0-15', '16-31' etc."<<endl;exit(0);}
+  if(vDisCh.size() != 2|| vDisSt.size() != 2)
+    MiaoError("Set the channels and strips like '0-15', '16-31' etc.");
   int ch_start = atoi(vDisCh[0].c_str());
   int ch_end = atoi(vDisCh[1].c_str());
   int st_start = atoi(vDisSt[0].c_str());
   int st_end = atoi(vDisSt[1].c_str());
   int clen = abs(ch_start-ch_end);
   if(clen != abs(st_start-st_end))
-  {cout<<"Miao! Error: Set the lengh of channels and strips should be equal."<<endl;exit(0);}
+    MiaoError("Set the num of channels and strips should be equal.");
   int ch_step,st_step;
   if(ch_start<=ch_end) ch_step = 1;
   else ch_step = -1;
@@ -82,3 +87,11 @@ vector<string> mappingManager::split(string str,string pattern)
 }
 mappingManager::~mappingManager()
 {}
+
+DSSDmapping* mappingManager::GetMap(string dssdName)
+{
+  if(!mapDSSD.count(dssdName))
+    MiaoError("The name of detector is not defined.");
+  return mapDSSD[dssdName];
+
+}
